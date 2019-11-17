@@ -10,12 +10,12 @@ const reducer = (state: TheState) => {
 }
 
 /*
-  why not use useState() here, because id does not play nice with the useEffect hook
-  that should only run on mount/unmound (2nd parameter []). But then current
-  value of useState is never updated withing the effect function. It will only
-  be updated, if I either remove the [] or add the state I'm depending on [state}.
-  In booth cases the logic will be executed multiple times and not only
-  on mount/unmount.
+ why not use useState() here, because it does not play nice with the useEffect hook
+ that should only run on mount/unmount (2nd parameter []). But then current
+ value of useState is never updated withing the effect function. It will only
+ be updated, if I either remove the [] or add the state I'm depending on [state}.
+ In booth cases the logic will be executed multiple times and not only
+ on mount/unmount.
  */
 const useKeyToggle = (targetKey: string) => {
   const [state, dispatch] = useReducer(reducer, initialState)
