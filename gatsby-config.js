@@ -10,8 +10,8 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-root-import',
       options: {
-        src: path.join(__dirname, 'src')
-      }
+        src: path.join(__dirname, 'src'),
+      },
     },
     {
       resolve: `gatsby-plugin-typescript`,
@@ -20,6 +20,21 @@ module.exports = {
         jsxPragma: `React`,
         allExtensions: false,
       },
+    },
+    {
+      resolve: "gatsby-plugin-chakra-ui",
+      options: {
+        /**
+         * @property {boolean} [isResettingCSS=true]
+         * if false, this plugin will not use `<CSSReset />
+         */
+        isResettingCSS: true,
+        /**
+         * @property {boolean} [isUsingColorMode=true]
+         * if false, this plugin will not use <ColorModeProvider />
+         */
+        isUsingColorMode: true,
+      },
     }
-  ]
+  ],
 }
