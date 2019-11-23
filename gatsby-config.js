@@ -6,6 +6,7 @@
 const path = require('path')
 
 module.exports = {
+  pathPrefix: "/bulletin",
   plugins: [
     {
       resolve: 'gatsby-plugin-root-import',
