@@ -5,6 +5,7 @@
   "version": "0.1.0",
   "license": "MIT",
   "scripts": {
+    "deploy": "gh-pages -d public",
     "build": "gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
@@ -30,6 +31,7 @@
     "@types/react-dom": "16.9.4",
     "gatsby-plugin-root-import": "2.0.5",
     "gatsby-plugin-typescript": "2.1.19",
+    "gh-pages": "2.1.1",
     "prettier": "1.19.1",
     "typescript": "3.7.2"
   },
