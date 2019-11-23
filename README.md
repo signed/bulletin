@@ -4,6 +4,8 @@
 
 ## 🚀 Quick start
 
+1. Try at https://signed.github.io/bulletin
+
 1.  **Start developing.**
     ```shell
     gatsby develop
