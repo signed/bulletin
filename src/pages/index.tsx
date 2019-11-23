@@ -1,15 +1,65 @@
+import { BoxProps, CSSReset, Flex, Input, Text, ThemeProvider } from '@chakra-ui/core'
 import * as React from 'react'
-import { Box, CSSReset, Text, ThemeProvider } from '@chakra-ui/core'
-import { useKeyToggle, key } from 'src/components/use-key-toggle'
+import { ChangeEvent, KeyboardEvent, useState } from 'react'
 
 const IndexPage = () => {
-  let pressed = useKeyToggle(key('Escape', ['Alt', 'Control']))
+  let initialText = new Date().toISOString()
+  const [text, setText] = useState(initialText)
+  const [inputMode, setInputMode] = useState(false)
+  const textInput = React.createRef<HTMLInputElement>()
+
+  const handleInputKeyDown = (event: KeyboardEvent<HTMLInputElement>): void => {
+    if (event.key === 'Enter' || event.key === 'Escape') {
+      setInputMode(false)
+    }
+  }
+  const handleClickOnText = (): void => {
+    setInputMode(true)
+    let inputElement = textInput.current!
+    setTimeout(()=> {
+      inputElement.focus()
+      inputElement.select()
+    })
+  }
+
+  const handleBlur = () => {
+    console.log('wup di du')
+    setInputMode(false)
+
+  }
+
+  const sharedStyles: Pick<BoxProps, 'fontSize' | 'fontWeight' | 'color' | 'textAlign'> = {
+    fontSize: '5xl', 
+    fontWeight: 'black',
+    color: 'blueviolet',
+    textAlign: 'center',
+  }
+
+  const inputDisplay = inputMode ? 'unset' : 'none'
+  const textDisplay = inputMode ? 'none' : 'unset'
+
   return (
     <ThemeProvider>
       <CSSReset/>
-      <Box p={8}>
-        <Text fontSize="xl">Hello World pressed: {pressed ? 'true' : 'false'} {new Date().toISOString()}</Text>
-      </Box>
+      <Flex direction={'column'} justify={'center'} alignItems={'center'} height={'100vh'}>
+        <Input display={inputDisplay  }
+               onKeyDown={handleInputKeyDown}
+               {...sharedStyles} placeholder="Type here..."
+               value={text}
+               onChange={(event: ChangeEvent<HTMLInputElement>) => setText(event.target.value)}
+               onBlur={handleBlur}
+               ref={textInput}
+        />
+        <Text display={textDisplay}
+              as={'span'}
+              onClick={handleClickOnText}
+              {...sharedStyles}>
+          {text}
+        </Text>
+        <Text as={'span'}>
+          {text}
+        </Text>
+      </Flex>
     </ThemeProvider>
   )
 }
