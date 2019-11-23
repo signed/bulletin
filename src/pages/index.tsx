@@ -17,15 +17,14 @@ const IndexPage = () => {
     setInputMode(true)
     let inputElement = textInput.current!
     setTimeout(()=> {
+      // TODO: is there another way to give focus to revealed input field
       inputElement.focus()
       inputElement.select()
     })
   }
 
   const handleBlur = () => {
-    console.log('wup di du')
     setInputMode(false)
-
   }
 
   const sharedStyles: Pick<BoxProps, 'fontSize' | 'fontWeight' | 'color' | 'textAlign'> = {
