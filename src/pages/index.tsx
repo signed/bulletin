@@ -76,6 +76,7 @@ const IndexPage = () => {
                value={text}
                onChange={(event: ChangeEvent<HTMLInputElement>) => setText(event.target.value)}
                onBlur={handleBlurOnTextInput}
+               focusBorderColor={'transparent'}
                ref={textInput}
         />
         <Text display={textDisplay}
