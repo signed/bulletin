@@ -34,5 +34,10 @@ export class ThemeHistory {
     this.index ++
     return nextColors
   }
+
+  previous(): Theme {
+    this.index = Math.max(0, this.index - 1)
+    return this.current
+  }
 }
 
