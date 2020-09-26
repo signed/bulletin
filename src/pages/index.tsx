@@ -1,5 +1,5 @@
 import { BoxProps, CSSReset, Flex, Input, Text, ThemeProvider } from '@chakra-ui/core'
-import { randomColors } from 'components/theme-history'
+import { randomTheme } from 'components/theme-history'
 import * as React from 'react'
 import { ChangeEvent, KeyboardEvent, MouseEvent, useEffect, useState } from 'react'
 
@@ -7,7 +7,7 @@ const IndexPage = () => {
   let initialText = new Date().toISOString()
   const [text, setText] = useState(initialText)
   const [inputMode, setInputMode] = useState(false)
-  const [colors, setColors] = useState(randomColors())
+  const [colors, setColors] = useState(randomTheme())
 
   const textInput = React.createRef<HTMLInputElement>()
   const body = React.createRef<HTMLDivElement>()
@@ -44,7 +44,7 @@ const IndexPage = () => {
     if (event.target !== body.current) {
       return
     }
-    setColors(() => randomColors())
+    setColors(() => randomTheme())
   }
 
   useEffect(() => {
@@ -53,7 +53,7 @@ const IndexPage = () => {
         return
       }
       if (e.key === 'ArrowRight') {
-        setColors(() => randomColors())
+        setColors(() => randomTheme())
       }
     }
     window.addEventListener('keyup', listener)
