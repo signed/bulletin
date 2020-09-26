@@ -15,6 +15,14 @@ const randomColors = (): Colors => {
   }
 }
 
+class ColorHistory {
+
+
+  constructor(size: number) {
+  }
+
+}
+
 const IndexPage = () => {
   let initialText = new Date().toISOString()
   const [text, setText] = useState(initialText)
