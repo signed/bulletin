@@ -32,7 +32,7 @@ export class ThemeHistory {
     const nextColors = this.themeSource()
     this.history.push(nextColors)
     this.index ++
-    return nextColors
+    return this.current
   }
 
   previous(): Theme {
