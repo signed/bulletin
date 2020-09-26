@@ -1,7 +1,7 @@
 import { BoxProps, CSSReset, Flex, Input, Text, ThemeProvider } from '@chakra-ui/core'
-import * as React from 'react'
-import { ChangeEvent, KeyboardEvent, useState, MouseEvent } from 'react'
 import randomColor from 'randomcolor'
+import * as React from 'react'
+import { ChangeEvent, KeyboardEvent, MouseEvent, useEffect, useState } from 'react'
 
 interface Colors {
   text: string
@@ -56,8 +56,24 @@ const IndexPage = () => {
     if (event.target !== body.current) {
       return
     }
-    setColors(randomColors())
+    setColors(() => randomColors())
   }
+
+  useEffect(() => {
+    let listener = (e: globalThis.KeyboardEvent) => {
+      if (!e.altKey) {
+        return
+      }
+      if (e.key === 'ArrowRight') {
+        setColors(() => randomColors())
+      }
+    }
+    window.addEventListener('keyup', listener)
+
+    return () => {
+      window.removeEventListener('keyup', listener)
+    }
+  }, [])
 
   const inputDisplay = inputMode ? 'unset' : 'none'
   const textDisplay = inputMode ? 'none' : 'unset'
