@@ -1,27 +1,7 @@
 import { BoxProps, CSSReset, Flex, Input, Text, ThemeProvider } from '@chakra-ui/core'
-import randomColor from 'randomcolor'
+import { randomColors } from 'components/color-history'
 import * as React from 'react'
 import { ChangeEvent, KeyboardEvent, MouseEvent, useEffect, useState } from 'react'
-
-interface Colors {
-  text: string
-  background: string
-}
-
-const randomColors = (): Colors => {
-  return {
-    text: randomColor(),
-    background: randomColor(),
-  }
-}
-
-class ColorHistory {
-
-
-  constructor(size: number) {
-  }
-
-}
 
 const IndexPage = () => {
   let initialText = new Date().toISOString()
