@@ -1,5 +1,5 @@
 import { BoxProps, CSSReset, Flex, Input, Text, ThemeProvider } from '@chakra-ui/core'
-import { randomColors } from 'components/color-history'
+import { randomColors } from 'components/theme-history'
 import * as React from 'react'
 import { ChangeEvent, KeyboardEvent, MouseEvent, useEffect, useState } from 'react'
 

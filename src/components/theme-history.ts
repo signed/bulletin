@@ -1,26 +1,32 @@
-import { Colors } from 'components/colors'
 import randomColor from 'randomcolor'
 
-export const randomColors = (): Colors => {
+export type Color = string
+
+export interface Theme {
+  text: Color
+  background: Color
+}
+
+export const randomColors = (): Theme => {
   return {
     text: randomColor(),
     background: randomColor(),
   }
 }
 
-export class ColorHistory {
-  private readonly history: Colors[] = []
+export class ThemeHistory {
+  private readonly history: Theme[] = []
   private index: number = 0
 
   constructor() {
     this.history.push(randomColors())
   }
 
-  get currentColor(): Colors {
+  get currentColor(): Theme {
     return this.history[this.index]
   }
 
-  next(): Colors {
+  next(): Theme {
     const nextColors = randomColors()
     this.history.push(nextColors)
     this.index ++
