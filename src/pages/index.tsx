@@ -1,13 +1,13 @@
 import { BoxProps, CSSReset, Flex, Input, Text, ThemeProvider } from '@chakra-ui/core'
-import { randomTheme } from 'components/theme-history'
 import * as React from 'react'
-import { ChangeEvent, KeyboardEvent, MouseEvent, useEffect, useState } from 'react'
+import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react'
+import { useThemeHistory } from '../components/use-theme-history'
 
 const IndexPage = () => {
   let initialText = new Date().toISOString()
   const [text, setText] = useState(initialText)
   const [inputMode, setInputMode] = useState(false)
-  const [colors, setColors] = useState(randomTheme())
+  const { theme, next, previous } = useThemeHistory(5)
 
   const textInput = React.createRef<HTMLInputElement>()
   const body = React.createRef<HTMLDivElement>()
@@ -35,16 +35,9 @@ const IndexPage = () => {
   const sharedStyles: Pick<BoxProps, 'fontSize' | 'fontWeight' | 'color' | 'textAlign' | 'background'> = {
     fontSize: '5xl',
     fontWeight: 'black',
-    color: colors.text,
-    background: colors.background,
+    color: theme.text,
+    background: theme.background,
     textAlign: 'center',
-  }
-
-  const roleNewColors = (event: MouseEvent) => {
-    if (event.target !== body.current) {
-      return
-    }
-    setColors(() => randomTheme())
   }
 
   useEffect(() => {
@@ -52,8 +45,11 @@ const IndexPage = () => {
       if (!e.altKey) {
         return
       }
+      if (e.key === 'ArrowLeft') {
+        previous()
+      }
       if (e.key === 'ArrowRight') {
-        setColors(() => randomTheme())
+        next()
       }
     }
     window.addEventListener('keyup', listener)
@@ -70,8 +66,7 @@ const IndexPage = () => {
     <ThemeProvider>
       <CSSReset/>
       <Flex direction={'column'} justify={'center'} alignItems={'center'} height={'100vh'}
-            background={colors.background}
-            onClick={roleNewColors}
+            background={theme.background}
             ref={body}
       >
         <Input display={inputDisplay}
