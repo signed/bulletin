@@ -1,4 +1,5 @@
 import { BoxProps, CSSReset, Flex, Input, Text, ThemeProvider } from '@chakra-ui/core'
+import { Key } from '../components/key'
 import * as React from 'react'
 import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react'
 import { useThemeHistory } from '../components/use-theme-history'
@@ -64,11 +65,23 @@ const IndexPage = () => {
 
   return (
     <ThemeProvider>
-      <CSSReset/>
-      <Flex direction={'column'} justify={'center'} alignItems={'center'} height={'100vh'}
+      <CSSReset />
+      <Flex direction={'column'}
+            justify={'center'}
+            alignItems={'center'}
+            height={'100vh'}
             background={theme.background}
             ref={body}
       >
+        <Flex as={'div'}
+              position={'absolute'}
+              bottom={'5px'}
+              left={'5px'}
+        >
+          <Key>&#8592;</Key>
+          <Key>alt</Key>
+          <Key>&#8594;</Key>
+        </Flex>
         <Input display={inputDisplay}
                onKeyDown={handleInputKeyDown}
                {...sharedStyles} placeholder="Type here..."
