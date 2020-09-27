@@ -1,8 +1,9 @@
+import { useForceRender } from '../components/use-force-render'
+import { useRef } from 'react'
 import { randomTheme, ThemeHistory } from '../components/theme-history'
-import { useRef, useState } from 'react'
 
 export const useThemeHistory = (size: number) => {
-  const [_, render] = useState<boolean>(true)
+  const {forceRender} = useForceRender()
   const themeHistoryRef = useRef(new ThemeHistory(randomTheme, size))
   const themeHistory = themeHistoryRef.current
 
@@ -10,11 +11,11 @@ export const useThemeHistory = (size: number) => {
   const entries = themeHistory.entries
   const next = () => {
     themeHistory.next()
-    render((curr) => !curr)
+    forceRender()
   }
   const previous = () => {
     themeHistory.previous()
-    render((curr) => !curr)
+    forceRender()
   }
 
   return {
