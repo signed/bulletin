@@ -17,21 +17,39 @@ export const randomTheme = (): Theme => {
 export type ThemeSource = () => Theme
 
 export class ThemeHistory {
-  private readonly history: Theme[] = []
+  private readonly _entries: Theme[] = []
   private index: number = 0
 
-  constructor(private readonly themeSource: ThemeSource) {
-    this.history.push(this.themeSource())
+  constructor(
+    private readonly themeSource: ThemeSource,
+    private readonly size: number) {
+    this._entries.push(this.themeSource())
+  }
+
+  get entries(): Theme[] {
+    return [...this._entries]
   }
 
   get current(): Theme {
-    return this.history[this.index]
+    return this._entries[this.index]
   }
 
   next(): Theme {
+    const latestThemeSelected = this.index === this._entries.length - 1
+    if (!latestThemeSelected) {
+      this.index++
+      return this.current
+    }
+    const isAtCapacity = this.entries.length === this.size
+    if (isAtCapacity) {
+      this._entries.shift()
+      this.index--
+    }
+
     const nextColors = this.themeSource()
-    this.history.push(nextColors)
-    this.index ++
+    this._entries.push(nextColors)
+    this.index++
+
     return this.current
   }
 

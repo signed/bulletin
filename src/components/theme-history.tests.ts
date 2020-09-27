@@ -19,7 +19,7 @@ describe("ThemeHistory", () => {
   let themeHistory: ThemeHistory
 
   beforeEach(() => {
-    themeHistory = new ThemeHistory(preRecordedThemes())
+    themeHistory = new ThemeHistory(preRecordedThemes(), 10)
   })
 
   test("after creation there is a current current", () => {
@@ -28,13 +28,24 @@ describe("ThemeHistory", () => {
     expect(current).toBe(_1st)
   });
 
-  test("next creates new theme", () => {
-    const newTheme = themeHistory.next()
-    const currentTheme = themeHistory.current
+  describe('next', () => {
+    test("creates new theme if current theme is the latest in the entries", () => {
+      const newTheme = themeHistory.next()
+      const currentTheme = themeHistory.current
 
-    expect(newTheme).toBe(_2nd);
-    expect(currentTheme).toBe(_2nd);
-  });
+      expect(newTheme).toBe(_2nd);
+      expect(currentTheme).toBe(_2nd);
+    });
+
+    test('move one towards the end of the entries list if current theme is not the latest in the entries ', () => {
+      themeHistory.next()
+      themeHistory.previous()
+      themeHistory.next()
+
+      expect(themeHistory.entries).toHaveLength(2)
+      expect(themeHistory.current).toBe(_2nd);
+    })
+  })
 
   describe('previous', () => {
     test("returns the previous theme", () => {
@@ -52,6 +63,16 @@ describe("ThemeHistory", () => {
 
       expect(previous).toBe(_1st);
       expect(currentTheme).toBe(_1st);
+    })
+  })
+
+  describe('entries', () => {
+    test('only remember the number of themes specified', () => {
+      const themeHistory = new ThemeHistory(preRecordedThemes(), 2)
+      expect(themeHistory.entries).toStrictEqual([_1st])
+      themeHistory.next()
+      themeHistory.next()
+      expect(themeHistory.entries).toStrictEqual([_2nd, _3rd])
     })
   })
 });
