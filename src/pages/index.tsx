@@ -60,6 +60,10 @@ const IndexPage = () => {
     }
   }, [])
 
+  useEffect(() => {
+    document.title = text
+  }, [text])
+
   const inputDisplay = inputMode ? 'unset' : 'none'
   const textDisplay = inputMode ? 'none' : 'unset'
 
@@ -84,7 +88,7 @@ const IndexPage = () => {
         </Flex>
         <Input display={inputDisplay}
                onKeyDown={handleInputKeyDown}
-               {...sharedStyles} placeholder="Type here..."
+               {...sharedStyles} placeholder='Type here...'
                value={text}
                onChange={(event: ChangeEvent<HTMLInputElement>) => setText(event.target.value)}
                onBlur={handleBlurOnTextInput}
