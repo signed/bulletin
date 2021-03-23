@@ -1,4 +1,4 @@
-import { BoxProps, CSSReset, Flex, Input, Text, ThemeProvider } from '@chakra-ui/core'
+import { BoxProps, CSSReset, Flex, Input, Text, ChakraProvider } from '@chakra-ui/react'
 import { Key } from '../components/key'
 import * as React from 'react'
 import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react'
@@ -64,7 +64,7 @@ const IndexPage = () => {
   const textDisplay = inputMode ? 'none' : 'unset'
 
   return (
-    <ThemeProvider>
+    <ChakraProvider>
       <CSSReset />
       <Flex direction={'column'}
             justify={'center'}
@@ -98,7 +98,7 @@ const IndexPage = () => {
           {text}
         </Text>
       </Flex>
-    </ThemeProvider>
+    </ChakraProvider>
   )
 }
 

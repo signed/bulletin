@@ -6,9 +6,9 @@
 const path = require('path')
 
 module.exports = {
-  pathPrefix: "/bulletin",
+  pathPrefix: '/bulletin',
   flags: {
-    DEV_SSR: false
+    DEV_SSR: false,
   },
   plugins: [
     {
@@ -26,7 +26,7 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-plugin-chakra-ui",
+      resolve: '@chakra-ui/gatsby-plugin',
       options: {
         /**
          * @property {boolean} [isResettingCSS=true]
@@ -39,6 +39,5 @@ module.exports = {
          */
         isUsingColorMode: true,
       },
-    }
-  ],
+    }],
 }
