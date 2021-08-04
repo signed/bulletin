@@ -5,7 +5,7 @@ import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react'
 import { useThemeHistory } from '../components/use-theme-history'
 
 const IndexPage = () => {
-  const [text, setText] = useState(() => new URLSearchParams(document.location.search).get('text') ?? new Date().toISOString())
+  const [text, setText] = useState('')
   const [inputMode, setInputMode] = useState(false)
   const { theme, next, previous } = useThemeHistory(5)
 
@@ -39,6 +39,10 @@ const IndexPage = () => {
     background: theme.background,
     textAlign: 'center',
   }
+
+  useEffect(() => {
+    setText(() => new URLSearchParams(document.location.search).get('text') ?? new Date().toISOString())
+  }, [])
 
   useEffect(() => {
     let listener = (e: globalThis.KeyboardEvent) => {
